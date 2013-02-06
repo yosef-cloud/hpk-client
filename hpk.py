@@ -3,11 +3,8 @@
 import re
 import urllib
 
-pgp_re = re.compile(r'''-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: ([^\n]+)
-
-(.*)
------END PGP PUBLIC KEY BLOCK-----''', re.S | re.M)
+pgp_re = re.compile(r'(-----BEGIN PGP PUBLIC KEY BLOCK-----'
+                     '.*-----END PGP PUBLIC KEY BLOCK-----)', re.S | re.M)
 url = r'http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x%s'
 
 def read_key(key_id):
