@@ -15,6 +15,9 @@ class HKPServer(KeyServerBase):
         self.server = self.server.rstrip('/')
 
     def find(self, key_id):
+        if isinstance(key_id, long):
+            key_id = '0x%x' % key_id
+
         pgp_re = re.compile('(-----BEGIN PGP PUBLIC KEY BLOCK-----'
                             '.*-----END PGP PUBLIC KEY BLOCK-----)',
                             re.S | re.M)
@@ -37,3 +40,6 @@ if __name__ == "__main__":
 
     keyserver2 = HKPServer(server='http://pool.sks-keyservers.net:11371/')
     print keyserver2.find('0xffb4080e2d5ae5f1')
+
+    keyserver3 = HKPServer(server='http://pool.sks-keyservers.net:11371/')
+    print keyserver3.find(18425360832463037937)
